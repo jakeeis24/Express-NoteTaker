@@ -25,18 +25,9 @@ app.get("/", (req, res) =>
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
-
-// app.get("/api/notes", (req, res) =>
-//   res.sendFile(
-//     path.join(__dirname, "./db/db.json", "utf-8", (err, data) => {
-//       if (err) {
-//         console.log(err, "dis be da problem");
-//       }
-//       const parsedNotes = JSON.parse(data);
-//       res.sendFile(parsedNotes);
-//     })
-//   )
-// );
+//api routes in routes folder
+const apiRoutes = require("./routes/apiRoute");
+app.use(apiRoutes);
 //listen
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
