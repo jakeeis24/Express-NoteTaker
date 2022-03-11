@@ -16,6 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
+//api routes in routes folder
+const apiNotes = require("./routes/apiNotes");
+app.use(apiNotes);
+
 //GET route for home page
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
@@ -25,9 +29,7 @@ app.get("/", (req, res) =>
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
-//api routes in routes folder
-const apiRoutes = require("./routes/apiRoute");
-app.use(apiRoutes);
+
 //listen
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
