@@ -18,17 +18,26 @@ app.use(express.static("public"));
 
 //api routes in routes folder
 const apiNotes = require("./routes/apiNotes");
+const res = require("express/lib/response");
 app.use(apiNotes);
 
 //GET route for home page
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "/public/index.html"))
-);
+app.get("/", (req, res) => {
+  console.log("/ GET");
+  res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 
 //GET Route for notes page
-app.get("/notes", (req, res) =>
-  res.sendFile(path.join(__dirname, "/public/notes.html"))
-);
+app.get("/notes", (req, res) => {
+  console.log("Notes GET");
+  res.sendFile(path.join(__dirname, "/public/notes.html"));
+});
+
+//everything
+app.get("*", (req, res) => {
+  console.log("WILD");
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
 
 //listen
 app.listen(PORT, () =>
