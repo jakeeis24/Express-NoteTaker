@@ -15,13 +15,6 @@ const data = require("../db/db.json");
  *  @returns {void} Nothing
  */
 
-/**
- *  Function to read data from a given a file and append some content
- *  @param {object} content The content you want to append to the file.
- *  @param {string} file The path to the file you want to save to.
- *  @returns {void} Nothing
- */
-
 // Promisify version of fs.readFile
 const readFromFile = util.promisify(fs.readFile);
 const writeToFile = (destination, content) =>
@@ -51,8 +44,8 @@ router.post("", (req, res) => {
   //log that the post request was received
   console.info(`${req.method} request received to post a note`);
   //destructure items in req body
-  const { noteTitle, noteText } = req.body;
-  if (noteTitle && noteText) {
+  const { title, text } = req.body;
+  if (title && text) {
     const newNote = { title, text, id: uuid() };
     readAndAppend(newNote, "./db/db.json");
     const response = {
