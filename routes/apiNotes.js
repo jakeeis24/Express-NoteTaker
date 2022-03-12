@@ -54,7 +54,7 @@ router.post("", (req, res) => {
     };
     res.json(response);
   } else {
-    res.json("u suk --- error in POST");
+    res.json("error in POST");
   }
   console.log(req.body);
 });

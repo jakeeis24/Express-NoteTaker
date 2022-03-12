@@ -28,7 +28,7 @@ app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
-//wild
+//returns index.html file
 app.get("*", (req, res) => {
   console.log("WILD");
   res.sendFile(path.join(__dirname, "./public/index.html"));
