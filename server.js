@@ -1,25 +1,20 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const api = require("./routes/index.js");
+const apiNotes = require("./routes/apiNotes.js");
 //----------unique id's
 //const uuid = require("./helpers/uuid");
 const PORT = process.env.PORT || 9420;
-const app = express();
 
-//array for note objects in db.json
-let notes = [];
+const app = express();
 
 //middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use('/api', api)
+app.use("/api", api);
 
 app.use(express.static("public"));
-
-//api routes in routes folder
-const apiNotes = require("./routes/apiNotes");
-const res = require("express/lib/response");
-app.use(apiNotes);
 
 //GET route for home page
 app.get("/", (req, res) => {
@@ -29,11 +24,11 @@ app.get("/", (req, res) => {
 
 //GET Route for notes page
 app.get("/notes", (req, res) => {
-  console.log("Notes GET");
+  console.log("Notes GET server.js");
   res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
-//everything
+//wild
 app.get("*", (req, res) => {
   console.log("WILD");
   res.sendFile(path.join(__dirname, "./public/index.html"));

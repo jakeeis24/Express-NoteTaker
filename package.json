@@ -23,5 +23,6 @@
   "bugs": {
     "url": "https://github.com/jakeeis24/Express-NoteTaker/issues"
   },
-  "homepage": "https://github.com/jakeeis24/Express-NoteTaker#readme"
+  "homepage": "https://github.com/jakeeis24/Express-NoteTaker#readme",
+  "devDependencies": {}
 }
