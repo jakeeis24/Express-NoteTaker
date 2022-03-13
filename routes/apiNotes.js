@@ -34,13 +34,15 @@ const readAndAppend = (content, file) => {
 };
 
 //GET api notes
-router.get("", (req, res) => {
+router.get("/", (req, res) => {
   console.log(`${req.method} req for /notes from apiNotes`);
-  readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
+  readFromFile("./db/db.json", "utf8").then((data) =>
+    res.json(JSON.parse(data))
+  );
 });
 
 //POST api notes
-router.post("", (req, res) => {
+router.post("/", (req, res) => {
   //log that the post request was received
   console.info(`${req.method} request received to post a note`);
   //destructure items in req body
@@ -57,6 +59,26 @@ router.post("", (req, res) => {
     res.json("error in POST");
   }
   console.log(req.body);
+});
+
+//delete
+router.delete(`/:id`, (req, res) => {
+  readFromFile("./db/db.json", "utf8").then((data) => {
+    console.log(data);
+    data = JSON.parse(data);
+    console.log(data);
+    // let newData = [];
+    // for (let i = 0; i < data.length; i++) {
+    //   console.log(data, req.params.id, data[i].id);
+    //   if (req.params.id === data[i].id) {
+    //     data = data.splice(i, 0);
+    //     console.log(data);
+    //   }
+    // }
+    data = data.filter((data) => data.id !== req.params.id);
+    fs.writeFileSync("./db/db.json", JSON.stringify(data, null, 2));
+    res.json(data);
+  });
 });
 
 //export
